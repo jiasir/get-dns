@@ -3,7 +3,7 @@ __author__ = 'Taio'
 import os
 import subprocess
 
-class noflib:
+class Noflib:
     def execute_get_output(self, *command):
         """Execute and return stdout."""
         self.devnull = open(os.devnull, 'w')
