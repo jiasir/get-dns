@@ -24,7 +24,8 @@ def install_modules():
 
 def main():
     if not os.path.exists('/var/log/get-dns'):
-       run.execute_get_output('sudo', 'mkdir', '/var/log/get-dns')
+        logger.info('Making directory /var/log/get-dns')
+        run.execute_get_output('sudo', 'mkdir', '/var/log/get-dns')
 
     logger.info('Getting modules')
     get_modules()
