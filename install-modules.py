@@ -5,7 +5,7 @@ from utils.noflib import Noflib
 import logging
 
 logger = logging.getLogger('install-modules')
-logging.basicConfig(filename='install-modules.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='/var/log/install-modules.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
 run = Noflib()
@@ -24,7 +24,8 @@ def install_modules():
 
 def main():
     if not os.path.exists('/var/log/get-dns'):
-       run.execute_get_output('sudo', 'mkdir', '/var/log/get-dns')
+        logger.info('Making directory /var/log/get-dns')
+        run.execute_get_output('sudo', 'mkdir', '/var/log/get-dns')
 
     logger.info('Getting modules')
     get_modules()
