@@ -20,6 +20,10 @@ z = dns.zone.from_xfr(dns.query.xfr(dcAdd, domainName))
 names = z.nodes.keys()
 names.sort()
 
+def get_client_hosts():
+    with open('client_hosts', 'r') as f:
+        return f.read()
+
 
 def print_local_host():
     print '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4'
@@ -34,7 +38,7 @@ def print_records_stdout():
         if line[3] == 'A':
             logger.info(line[4])
             new_line = line[4] + ' ' + line[0] + '.spidc1.com'
-            if new_line not in get_hosts():
+            if new_line not in get_except_hosts():
                 logger.info(new_line)
                 print new_line
 
@@ -50,12 +54,12 @@ def gen_records_spidc1():
         print IOError.__doc__
 
 
-def get_hosts():
+def get_except_hosts():
     """
     Get Linux hosts file.
     :return string:
     """
-    with open('/etc/hosts', 'r') as h:
+    with open('except_hosts', 'r') as h:
         return h.read()
 
 
@@ -65,6 +69,7 @@ def main():
 
     print_local_host()
     print_records_stdout()
+    print get_client_hosts()
 
 
 if __name__ == '__main__':
