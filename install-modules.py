@@ -19,7 +19,7 @@ def get_modules():
 
 def install_modules():
     '''install dnspython to package-sites'''
-    run.execute_get_output('python', 'setup.py', 'install')
+    run.execute_get_output('python', 'dnspython/setup.py', 'install')
 
 
 def main():
