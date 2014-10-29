@@ -5,7 +5,7 @@ from utils.noflib import Noflib
 import logging
 
 logger = logging.getLogger('install-modules')
-logging.basicConfig(filename='/var/log/install-modules.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='/var/log/get-dns/install-modules.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
 run = Noflib()
