@@ -2,7 +2,7 @@ __author__ = 'Taio'
 
 
 import os.path
-import dns.querry
+import dns.query
 import dns.zone
 import logging
 from utils.noflib import Noflib
@@ -14,14 +14,15 @@ logging.basicConfig(filename='get-dns.log', level=logging.DEBUG, format='%(ascti
 
 dcAdd = '172.20.10.75'
 domainName = 'spidc1.com'
-z = dns.zone.from_xfr(dns.querry.xfr(dcAdd), domainName)
+z = dns.zone.from_xfr(dns.query.xfr(dcAdd, domainName))
 names = z.nodes.keys()
 names.sort()
 
 def print_records_stdout():
     '''Print records only to stdout'''
     for i in names:
-        print z[i].to_text(n)
+        if i.find('IN A'):
+            print z[i].to_text(n)
 
 def gen_records_spidc1():
     '''Write to /etc/hosts file'''
@@ -36,9 +37,10 @@ def main():
     if not os.path.exists('/var/log/get-dns'):
         run.execute_get_output('sudo', 'mkdir', '/var/log/get-dns')
 
-    gen_records_spidc1()
+    print_records_stdout()
+    #gen_records_spidc1()
 
-if __name__ == 'main':
+if __name__ == '__main__':
     if os.getuid() == 0:
         main()
     else:
